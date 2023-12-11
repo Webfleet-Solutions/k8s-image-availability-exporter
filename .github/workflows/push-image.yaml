@@ -1,4 +1,4 @@
-name: build-and-push-base-image (release)
+name: Build and push image
 
 on:
 

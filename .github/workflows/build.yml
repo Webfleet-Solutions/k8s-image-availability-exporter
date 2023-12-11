@@ -1,0 +1,55 @@
+name: Test and build
+
+on:
+  push:
+    branches:
+      - master
+
+  pull_request:
+    branches:
+      - master
+
+
+permissions: write-all
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/setup-go@v4
+      with:
+        go-version: '1.19'
+
+    - uses: actions/checkout@v3.5.2
+
+    - name: Test With Coverage
+      run: go test -v -race  -coverprofile=coverage.txt -covermode=atomic ./...
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3.1.4
+      with:
+        files: coverage.txt
+
+    - name: golangci-lint
+      uses: golangci/golangci-lint-action@v3.4.0
+      with:
+        args: --timeout=5m
+        # since go test already does it in a previous step
+        skip-pkg-cache: true
+
+  build-image:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      -
+        name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          # Only for CI testing purposes
+          push: false
+          tags: wfs/k8s-image-availability-exporter:latest
