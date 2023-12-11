@@ -13,9 +13,9 @@ This chart bootstraps a [k8s-image-availability-exporter](https://github.com/fla
 To install the chart with the release name `my-release`:
 
 ```bash
-helm repo add flant_common_github https://charts.flant.com/common/github
+helm repo add webfleet-k8s-iae https://Webfleet-Solutions.github.io/k8s-image-availability-exporter
 helm repo update
-helm install my-release flant_common_github/k8s-image-availability-exporter
+helm install my-release webfleet-k8s-iae/k8s-image-availability-exporter
 ```
 
 The command deploys k8s-image-availability-exporter on the Kubernetes cluster in the default configuration. The [configuration](#configuration) section lists the parameters that can be configured during installation.
@@ -40,8 +40,8 @@ The following tables list the configurable parameters of the k8s-image-availabil
 | Parameter | Description | Default |
 | ----- | ----------- | ------ |
 | `k8sImageAvailabilityExporter.image.pullPolicy` | Image pull policy to use for the k8s-image-availability-exporter deployment | `IfNotPresent` |
-| `k8sImageAvailabilityExporter.image.repository` | Repository to use for the k8s-image-availability-exporter deployment | `flant/k8s-image-availability-exporter` |
-| `k8sImageAvailabilityExporter.image.tag` | Tag to use for the k8s-image-availability-exporter deployment | `v0.1.13` |
+| `k8sImageAvailabilityExporter.image.repository` | Repository to use for the k8s-image-availability-exporter deployment | `ghcr.io/Webfleet-Solutions/k8s-image-availability-exporter` |
+| `k8sImageAvailabilityExporter.image.tag` | Tag to use for the k8s-image-availability-exporter deployment | `latest` |
 | `k8sImageAvailabilityExporter.replicas` | Number of instances to deploy for a k8s-image-availability-exporter deployment. | `1` |
 | `k8sImageAvailabilityExporter.resources` | Resource limits for k8s-image-availability-exporter | `{}` |
 | `serviceMonitor.enabled` | Create [Prometheus Operator](https://github.com/coreos/prometheus-operator) serviceMonitor resource | `false` |
