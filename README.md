@@ -1,5 +1,13 @@
 # k8s-image-availability-exporter
 
+This is a fork aiming at fixing or at least circumventing the problems described in [Issue #7 of the upstream repository](https://github.com/deckhouse/k8s-image-availability-exporter/issues/7).
+
+As the upstream repo uses private build infrastructure, the CI process has been adapted and the master branch of this repo should not be merged into the upstream repo for this reason.
+
+To add a feature in this repository: Create a new branch in from the upstream repo as described [here](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-and-deleting-branches-within-your-repository).
+Then, merge your feature branch in both this repositories and the upstream `master` branches.
+
+---
 k8s-image-availability-exporter (or *k8s-iae* for short) is a Prometheus exporter that warns you proactively about images that are defined in Kubernetes objects (e.g., an `image` field in the Deployment) but are not available in the container registry (such as Docker Registry, etc.).
 
 Receiving alerts when container images related to running Kubernetes controllers are missing helps you to solve the problem before it manifests itself. For more details on the reasons behind k8s-iae and how it works, please read [this article](https://medium.com/flant-com/prometheus-exporter-to-check-kubernetes-images-availability-26c306c44c08).
