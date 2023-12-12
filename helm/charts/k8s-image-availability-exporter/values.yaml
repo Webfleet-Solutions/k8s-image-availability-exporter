@@ -1,7 +1,7 @@
 k8sImageAvailabilityExporter:
   image:
-    repository: registry.deckhouse.io/k8s-image-availability-exporter/k8s-image-availability-exporter
-    tag: v0.5.1
+    repository: ghcr.io/Webfleet-Solutions/k8s-image-availability-exporter
+    tag: latest
     pullPolicy: IfNotPresent
   replicas: 1
   resources: {}
