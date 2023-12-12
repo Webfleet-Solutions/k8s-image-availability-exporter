@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  k8s-image-availability-exporter:
+  - apiVersion: v1
+    appVersion: v0.5.1
+    created: "2023-12-12T11:10:36.437938577Z"
+    description: Application for monitoring the cluster workloads image presence in
+      docker registry.
+    digest: 75fc32c4bdfd5b7576846a72591fbdbf3582b105911deb554431dfd151d221d2
+    name: k8s-image-availability-exporter
+    urls:
+    - https://github.com/Webfleet-Solutions/k8s-image-availability-exporter/releases/download/k8s-image-availability-exporter-0.5.1/k8s-image-availability-exporter-0.5.1.tgz
+    version: 0.5.1
+generated: "2023-12-12T11:10:36.437948075Z"
