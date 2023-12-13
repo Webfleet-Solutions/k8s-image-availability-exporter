@@ -21,6 +21,7 @@ import (
 	appsv1informers "k8s.io/client-go/informers/apps/v1"
 	batchv1informers "k8s.io/client-go/informers/batch/v1"
 	corev1informers "k8s.io/client-go/informers/core/v1"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
 	"k8s.io/client-go/informers"
 
@@ -193,7 +194,17 @@ func NewRegistryChecker(
 	}
 	rc.controllerIndexers.cronJobIndexer = rc.cronJobsInformer.Informer().GetIndexer()
 
-	rc.controllerIndexers.secretIndexer = rc.secretsInformer.Informer().GetIndexer()
+	namespace := "default"
+	// Create a context
+	ctx := context.TODO()
+	// Attempt to list secrets in the default namespace
+	_, enumerr := kubeClient.CoreV1().Secrets(namespace).List(ctx, metav1.ListOptions{})
+	if enumerr != nil {
+		// Not add the secret indexer to automatic cache updater
+		logrus.Warn("The provided ServiceAccount is not able to list secrets. The check for images in private registries requires 'spec.imagePullSecrets' to be configured correctly.")
+	} else {
+		rc.controllerIndexers.secretIndexer = rc.secretsInformer.Informer().GetIndexer()
+	}
 
 	go informerFactory.Start(stopCh)
 	logrus.Info("Waiting for cache sync")
