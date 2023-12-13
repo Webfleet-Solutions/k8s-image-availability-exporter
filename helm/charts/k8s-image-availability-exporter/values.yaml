@@ -1,6 +1,6 @@
 k8sImageAvailabilityExporter:
   image:
-    repository: ghcr.io/Webfleet-Solutions/k8s-image-availability-exporter
+    repository: ghcr.io/webfleet-solutions/k8s-image-availability-exporter
     tag: latest
     pullPolicy: IfNotPresent
   replicas: 1
